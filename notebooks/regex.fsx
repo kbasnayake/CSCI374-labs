@@ -8,6 +8,7 @@ module RegularExpressions =
      let tester input test results =
         let rx = Regex(input, RegexOptions.Compiled ||| RegexOptions.Multiline)
         let ms = rx.Matches(test)
+        //printfn "%A" ms
         let found = List.map (fun e -> seq{ for m in ms -> m.Value = e} |> Seq.fold (||) false ) results
         if found |> Seq.fold (&&) (ms.Count>0)
         then "OK"
@@ -53,7 +54,7 @@ module RegularExpressions =
                         129-129-103
                         129-12-1031
                         12-129-1031
-                    """ ["129-129-1031"]
+                    """ ["129-12-1031"]
                     
     let match12 input =
         tester input """
